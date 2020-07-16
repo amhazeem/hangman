@@ -250,7 +250,8 @@ Features
 
     def print_word_definition(self):
         meaning = PyDictionary().meaning(self.correct_word)
-        pprint.pprint('MEANING:', {meaning})
+        print('DEFINITION')
+        pprint.pprint(meaning)
         print("*" * 20)
         input("...")
 
