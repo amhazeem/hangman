@@ -157,14 +157,13 @@ Features
 
     def display_board(self):
         print(f"{self.current_player.name}'s Turn")
+        # Display the hangman images based on the list index
         print(HANGMAN_IMAGE[self.current_player.count_missed_letters()])
-        print()
         print('Missed letters:', end=' ')
         for letter in self.current_player.missed_letters:
             print(letter, end=' ')
         print('\n')
         blanks = '_' * len(self.correct_word)
-
         for i in range(len(self.correct_word)):  # Replace blanks with correctly guessed letters.
             if self.correct_word[i] in self.current_player.correct_letters:
                 blanks = blanks[:i] + self.correct_word[i] + blanks[i + 1:]
@@ -239,21 +238,27 @@ Features
                 if current_round != self.number_of_rounds:
                     input('Next Player turn, Press any key to continue')
                 os.system('clear')
-        # Final Results
+        # Prints  Results
         print("Results:  ")
         for player in players:
             print(f"{player.name}= {player.score}")
         input("...")
 
     def shuffle(self):
+        # Set a new word for the next player
         self.correct_word = self.get_random_word()
 
     def print_word_definition(self):
         meaning = PyDictionary().meaning(self.correct_word)
-        print('DEFINITION')
-        pprint.pprint(meaning)
+        if meaning:
+            print('DEFINITION')
+            pprint.pprint(meaning)
+
+        else:
+            print('Error fetching definition ')
         print("*" * 20)
         input("...")
+
 
 
 def get_user_input(text, data_type=None):
